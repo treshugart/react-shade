@@ -1,6 +1,6 @@
 # react-shade
 
-> Use the Web Component Shadow DOM API as React components.
+> Use the Web Component Shadow DOM API as React components in a super-duper-Reacty way (i.e. declaratively).
 
 ## Install
 
