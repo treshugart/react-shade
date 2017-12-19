@@ -1,0 +1,5 @@
+/es
+/esnext
+/node
+/node_modules
+npm-debug.log*
