@@ -19,7 +19,7 @@ Instead of having to do all of this yourselves, you can now just compose togethe
 ```js
 import React from 'react';
 import { render } from 'react-dom';
-import Root, { Slot } from 'react-shadow-root';
+import Root, { Slot } from 'react-shade';
 
 const App = () => (
   <div>
