@@ -15,13 +15,7 @@
         ]
       },
       "esnext": {
-        "presets": [
-          "es2016",
-          "es2017",
-          "flow",
-          "react",
-          "stage-0"
-        ]
+        "presets": ["es2016", "es2017", "flow", "react", "stage-0"]
       },
       "node": {
         "presets": [
@@ -39,12 +33,7 @@
         ]
       },
       "test": {
-        "presets": [
-          "env",
-          "flow",
-          "react",
-          "stage-0"
-        ]
+        "presets": ["env", "flow", "react", "stage-0"]
       }
     }
   },
@@ -66,27 +55,20 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
-  "files": [
-    "es/",
-    "esnext/",
-    "node/"
-  ],
+  "files": ["es/", "esnext/", "node/"],
   "main": "index.js",
   "module": "es/index.js",
   "esnext": "esnext/index.js",
   "scripts": {
+    "build": "npm run build:es && npm run build:esnext && npm run build:node",
     "build:es": "BABEL_ENV=es babel src --out-dir es",
     "build:esnext": "BABEL_ENV=esnext babel src --out-dir esnext",
     "build:node": "BABEL_ENV=node babel src --out-dir node",
     "test": "jest"
   },
   "jest": {
-    "modulePathIgnorePatterns": [
-      "./node_modules"
-    ],
-    "setupFiles": [
-      "./jest"
-    ],
+    "modulePathIgnorePatterns": ["./node_modules"],
+    "setupFiles": ["./jest"],
     "testEnvironment": "@skatejs/ssr/jest"
   },
   "name": "react-shadow-dom",
