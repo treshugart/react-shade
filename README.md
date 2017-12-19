@@ -1,11 +1,11 @@
-# react-shadow-dom
+# react-shade
 
 > Use the Web Component Shadow DOM API as React components.
 
 ## Install
 
 ```sh
-npm install react-shadow-dom
+npm install react-shade
 ```
 
 ## Why
@@ -68,6 +68,29 @@ There's some drawbacks as noted above in the HTML comments:
 
 1. Attaching a shadow root requires a real DOM node. We don't want to reach up in the hierarchy and mutate the DOM, so the `Root` component needs to generate a node to attach a shadow to. This defaults to a `div`, but can be whatever you want. This isn't something that will ever be able to change due to the nature of the DOM and React.
 2. ReactDOM doesn't support calling `createPortal()` on a shadow root (or document fragment, which is what a shadow root appears to be under certain conditions). Therefore, we have to create a wrapper for the shadow root that we can use as the portal node. Once React supports rendering to a shadow root, this can be simplified.
+
+## Creating styled components
+
+Not Styled Components, obviously, and naively implemented. Basically a simple way to create primitives who's styles don't bleed out. I haven't implemented this yet, but would like to soon.
+
+```js
+import React from 'react';
+import { render } from 'react-dom';
+import Root, { Slot } from 'react-shade';
+
+const styled = (styles, tag = 'div') => ({ children, ...props }) => (
+  <Root tag={tag} {...props}>
+    <style>{`:host{${css}}`}</style>
+    <Slot>{children}</Slot>
+  </Root>
+);
+
+const Div = styled(`
+  border: 1px solid black;
+`);
+
+render(<Div />, window.root);
+```
 
 ## Differences to native Shadow DOM
 

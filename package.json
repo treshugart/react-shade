@@ -15,7 +15,13 @@
         ]
       },
       "esnext": {
-        "presets": ["es2016", "es2017", "flow", "react", "stage-0"]
+        "presets": [
+          "es2016",
+          "es2017",
+          "flow",
+          "react",
+          "stage-0"
+        ]
       },
       "node": {
         "presets": [
@@ -33,7 +39,12 @@
         ]
       },
       "test": {
-        "presets": ["env", "flow", "react", "stage-0"]
+        "presets": [
+          "env",
+          "flow",
+          "react",
+          "stage-0"
+        ]
       }
     }
   },
@@ -55,7 +66,11 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
-  "files": ["es/", "esnext/", "node/"],
+  "files": [
+    "es/",
+    "esnext/",
+    "node/"
+  ],
   "main": "index.js",
   "module": "es/index.js",
   "esnext": "esnext/index.js",
@@ -68,11 +83,15 @@
     "test": "jest"
   },
   "jest": {
-    "modulePathIgnorePatterns": ["./node_modules"],
-    "setupFiles": ["./jest"],
+    "modulePathIgnorePatterns": [
+      "./node_modules"
+    ],
+    "setupFiles": [
+      "./jest"
+    ],
     "testEnvironment": "@skatejs/ssr/jest"
   },
-  "name": "react-shadow-dom",
+  "name": "react-shade",
   "version": "0.0.0",
   "description": "",
   "author": "Trey Shugart <treshugart@gmail.com>",
