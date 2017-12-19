@@ -21,7 +21,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import Root, { Slot } from 'react-shadow-root';
 
-const App = (
+const App = () => (
   <div>
     <Root>
       <style>{`
