@@ -64,6 +64,7 @@
     "build:es": "BABEL_ENV=es babel src --out-dir es",
     "build:esnext": "BABEL_ENV=esnext babel src --out-dir esnext",
     "build:node": "BABEL_ENV=node babel src --out-dir node",
+    "prepublish": "npm run build",
     "test": "jest"
   },
   "jest": {
