@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Slot - renders a slot 1`] = `"<div></div>"`;
+
+exports[`Slot - renders a slot 2`] = `"<div><slot name=\\"slot-1\\"></slot></div>"`;
+
+exports[`Slot - renders multiple slots 1`] = `"<div></div>"`;
+
+exports[`Slot - renders multiple slots 2`] = `"<div><slot name=\\"slot-1\\"></slot><slot name=\\"slot-2\\"></slot><slot name=\\"slot-3\\"></slot></div>"`;
+
+exports[`Slot - slots content 1`] = `"<div></div>"`;
+
+exports[`Slot - slots content 2`] = `"<div><slot name=\\"slot-1\\"></slot><slot name=\\"slot-2\\"></slot><slot name=\\"slot-3\\"></slot></div>"`;
+
+exports[`Slot - slots content 3`] = `"<div><div></div>content 1<span slot=\\"slot-2\\">content 2</span><span slot=\\"slot-3\\">content 3</span></div>"`;
+
+exports[`props - tag 1`] = `"<span></span>"`;
+
+exports[`props - tag 2`] = `"<span>test</span>"`;
+
+exports[`rendered inside of another node 1`] = `"<section><div></div></section>"`;
+
+exports[`rendered inside of another node 2`] = `"<div><div>test</div></div>"`;
+
+exports[`renders elements into the shadow root 1`] = `"<div><div>test</div></div>"`;
+
+exports[`renders text into the shadow root 1`] = `"<div>test</div>"`;

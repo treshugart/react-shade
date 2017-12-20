@@ -7,17 +7,23 @@ export class Slot extends Component {
     shadowRoot: PropTypes.object
   };
   static slot = 0;
+  constructor(props) {
+    super(props);
+    this.slotName = `slot-${this.constructor.slot++}`;
+  }
   render() {
     const { children, defaultContent } = this.props;
     const { shadowRoot } = this.context;
-    const slotName = `slot-${this.constructor.slot++}`;
     const childrenMapped = Children.map(children, child => {
-      return cloneElement(child, {
-        slot: slotName
-      });
+      const isObject = typeof child === 'object';
+      return isObject
+        ? cloneElement(child, {
+            slot: isObject ? this.slotName : null
+          })
+        : child;
     });
     return (
-      <slot name={slotName}>
+      <slot name={this.slotName}>
         {defaultContent}
         {shadowRoot
           ? createPortal(childrenMapped, shadowRoot.host.parentNode)

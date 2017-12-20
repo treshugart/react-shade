@@ -32,12 +32,13 @@ export class Root extends Component<Props, State> {
   }
   render() {
     const { attachShadow, props, state } = this;
+    const { tag: Tag, ...rest } = this.props;
     return (
-      <props.tag {...props} ref={attachShadow}>
+      <Tag {...rest} ref={attachShadow}>
         {state.shadowRoot
           ? createPortal(props.children, state.shadowRoot.firstChild)
           : null}
-      </props.tag>
+      </Tag>
     );
   }
 }
