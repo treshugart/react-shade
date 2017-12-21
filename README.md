@@ -22,21 +22,19 @@ import { render } from 'react-dom';
 import Root, { Slot, Style } from 'react-shade';
 
 const App = () => (
-  <div>
-    <Root>
-      <Style>
-        {{
-          '.totes-not-global': {
-            fontWeight: 'bold'
-          }
-        }}
-      </Style>
-      <span className="totes-not-global">This will be bold.</span>
-      <Slot>
-        <span className="totes-not-global">This will NOT be bold</span>
-      </Slot>
-    </Root>
-  </div>
+  <Root>
+    <Style>
+      {{
+        '.totes-not-global': {
+          fontWeight: 'bold'
+        }
+      }}
+    </Style>
+    <span className="totes-not-global">This will be bold.</span>
+    <Slot>
+      <span className="totes-not-global">This will NOT be bold</span>
+    </Slot>
+  </Root>
 );
 
 render(<App />, window.root);
@@ -45,22 +43,20 @@ render(<App />, window.root);
 This will produce something like:
 
 ```html
+<!-- Requires a wrapping node because it needs to have a node to attach
+the shadow root to. -->
 <div>
-  <!-- Requires a wrapping node because it needs to have a node to attach
-  the shadow root to. -->
-  <div>
-    <!-- This is where the slot content ends up (as light DOM). -->
-    <span slot="slot-0">This will NOT be bold</span>
-    #shadow-root
-      <!-- ReactDOM doesn't support calling createPortal() on a shadow root so
-      we must create a wrapper node to portal into. Yes this is a valid name
-      and it's been picked because it's likely to not conflict. Once React
-      supports rendering to a shadow root this can be completely removed. -->
-      <shadow--root>
-        <style>.totes-not-global{font-weight:bold;}</style>
-        <slot name="slot-0"></slot>
-      </shadow--root>
-  </div>
+  <!-- This is where the slot content ends up (as light DOM). -->
+  <span slot="slot-0">This will NOT be bold</span>
+  #shadow-root
+    <!-- ReactDOM doesn't support calling createPortal() on a shadow root so
+    we must create a wrapper node to portal into. Yes this is a valid name
+    and it's been picked because it's likely to not conflict. Once React
+    supports rendering to a shadow root this can be completely removed. -->
+    <shadow--root>
+      <style>.totes-not-global{font-weight:bold;}</style>
+      <slot name="slot-0"></slot>
+    </shadow--root>
 </div>
 ```
 
