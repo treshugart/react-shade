@@ -2,6 +2,7 @@
   "presets": ["env", "flow", "react", "stage-0"],
   "env": {
     "es": {
+      "ignore": ["__tests__", "node_modules"],
       "presets": [
         [
           "env",
@@ -15,9 +16,11 @@
       ]
     },
     "esnext": {
+      "ignore": ["__tests__", "node_modules"],
       "presets": ["es2016", "es2017", "flow", "react", "stage-0"]
     },
     "node": {
+      "ignore": ["__tests__", "node_modules"],
       "presets": [
         [
           "env",

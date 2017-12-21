@@ -1,21 +1,21 @@
-import React, { Children, cloneElement, Component } from 'react';
+// @flow
+
+import React, { Children, cloneElement, Component, type Node } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
 type Props = {
-  defaultContent: Node,
-  wrapTextWith: string
+  children?: Node,
+  defaultContent?: Node
 };
 
 export class Slot extends Component<Props> {
   static contextTypes = {
     shadowRoot: PropTypes.object
   };
-  static defaultProps = {
-    defaultContent: ''
-  };
   static slot = 0;
-  constructor(props) {
+  slotName: string;
+  constructor(props: Props) {
     super(props);
     this.slotName = `slot-${this.constructor.slot++}`;
   }

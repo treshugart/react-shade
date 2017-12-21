@@ -1,16 +1,17 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { Component, type Node } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
 type Props = {
+  children?: Node,
   tag: string,
   tagForShadowRoot: string
 };
 
 type State = {
-  shadowRoot: Node
+  shadowRoot?: window.Node
 };
 
 export class Root extends Component<Props, State> {
@@ -22,7 +23,7 @@ export class Root extends Component<Props, State> {
     tagForShadowRoot: 'shadow--root'
   };
   state = {};
-  attachShadow = e => {
+  attachShadow: Function = (e: HTMLElement): void => {
     if (e) {
       const shadowRoot = e.attachShadow({ mode: 'open' });
       shadowRoot.appendChild(

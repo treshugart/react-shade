@@ -1,43 +1,29 @@
-import React from 'react';
+// @flow
+
+import React, { type Node } from 'react';
 import { Root } from './Root';
 import { Slot } from './Slot';
+import { styleRules } from './internal/css';
+import type { StyleRules } from './internal/types';
 
-function dashcase(str) {
-  return str.replace(/([A-Z]{1})/g, (match, parens, offset) => {
-    return `${offset ? '-' : ''}${parens.toLowerCase()}`;
-  });
-}
+type Opt = {
+  name: string | ((props: Object) => string),
+  slot: boolean
+};
 
-function ensurePx(val) {
-  return typeof val === 'number' ? `${val}px` : val;
-}
-
-function styleValueOrFunction(value, props) {
-  return typeof value === 'function' ? value(props) : value;
-}
-
-function styleProps(css, props) {
-  return Object.keys(css).reduce(
-    (p, c) =>
-      p + `${dashcase(c)}:${ensurePx(styleValueOrFunction(css[c], props))};`,
-    ''
-  );
-}
-
-function styleRules(css, props) {
-  return Object.keys(css).reduce(
-    (p, c) =>
-      p + `${c}{${styleProps(styleValueOrFunction(css[c], props), props)}}`,
-    ''
-  );
-}
+type Props = {
+  children?: Node
+};
 
 function tag(name, props) {
   return typeof name === 'function' ? name(props) : name;
 }
 
-const def = { name: 'div', slot: true };
-export const styled = (css, opt) => ({ children, ...props }) => {
+const def: Opt = { name: 'div', slot: true };
+export const styled = (css: StyleRules, opt: Opt) => ({
+  children,
+  ...props
+}: Props) => {
   const { name, slot } = { ...def, ...opt };
   return (
     <Root tag={tag(name, props)} {...props}>

@@ -1,8 +1,5 @@
 {
   "devDependencies": {
-    "@skatejs/ssr": "^0.18.0",
-    "babel-jest": "^22.0.3",
-    "conartist": "^0.15.0",
     "babel-cli": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2016": "^6.24.1",
@@ -11,17 +8,16 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "eslint-plugin-flowtype": "^2.34.0",
-    "flow-bin": "^0.55.0",
+    "flow-bin": "^0.61.0",
+    "babel-jest": "^22.0.3",
     "jest": "^22.0.3",
+    "@skatejs/ssr": "^0.18.0",
+    "conartist": "^0.15.1",
     "parcel-bundler": "^1.2.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
-  "files": [
-    "es/",
-    "esnext/",
-    "node/"
-  ],
+  "files": ["es/", "esnext/", "node/"],
   "main": "index.js",
   "module": "es/index.js",
   "esnext": "esnext/index.js",
@@ -31,12 +27,11 @@
     "build:node": "BABEL_ENV=node babel src --out-dir node",
     "test": "jest",
     "build": "npm run build:es && npm run build:esnext && npm run build:node",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "dev": "parcel demo/index.html"
   },
   "jest": {
-    "modulePathIgnorePatterns": [
-      "./node_modules"
-    ],
+    "modulePathIgnorePatterns": ["./node_modules"],
     "testEnvironment": "@skatejs/ssr/jest"
   },
   "peerDependencies": {
