@@ -112,7 +112,7 @@ This may appear to be syntactic sugar for using objects to represent your style 
 For example, this can be minified without adding anything extra to your build pipeline. You can also specify functions that react to props that are passed to `Style`. Both the set of rules and each property can be specified as a function. Whatever `props` that are passed to `Style` will be passed through.
 
 ```js
-const rulesAsFunction = ({ prop }) => ({
+const rulesAsFunction = ({ font }) => ({
   body: {
     fontFamily: valueAsFunction
   }
