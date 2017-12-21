@@ -1,9 +1,19 @@
+// @flow
+
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Root, { Slot, Style } from '../src';
 import { Demo, Heading, Hr, Text, Theme } from './components';
 
-class App extends Component {
+type Props = {
+  grid: number
+};
+
+type State = {
+  grid: string
+};
+
+class App extends Component<Props, State> {
   static defaultProps = {
     grid: 10
   };
