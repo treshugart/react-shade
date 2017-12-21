@@ -87,7 +87,7 @@ const Div = styled({
 
 ## Differences to native Shadow DOM
 
-A keen eye might spot some of these and notice that it's not how you'd normally do stuff with imperative JavaScript or HTML.
+A keen eye might spot some of these and notice that it's not how you'd normally do Shadow DOM with imperative JavaScript or HTML. I assure you, that is only superficial. _All aspects of react-shade's API fully utilises the native APIs._
 
 ### Custom slot component
 
