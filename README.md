@@ -136,9 +136,11 @@ You may also specify an `Array` for a value and it will be mapped into a string 
 </Style>
 ```
 
-Props are useful for passing in data from your application state. However, it's recommended you simply use CSS variables where you don't need to do that.
-
 _NOTE: All numeric values will get converted to `px` units._
+
+#### CSS custom properties (variables)
+
+Props are useful for passing in data from your application state. However, it's recommended you simply use CSS variables where you don't need to do that.
 
 ```js
 <Style>
