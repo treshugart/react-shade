@@ -57,7 +57,7 @@ This will produce something like:
       and it's been picked because it's likely to not conflict. Once React
       supports rendering to a shadow root this can be completely removed. -->
       <shadow--root>
-        <style>span {font-weight: bold;}</style>
+        <style>.totes-not-global{font-weight:bold;}</style>
         <slot name="slot-0"></slot>
       </shadow--root>
   </div>
