@@ -3,7 +3,7 @@
 import React, { type Node } from 'react';
 import { Root } from './Root';
 import { Slot } from './Slot';
-import { styleRules } from './internal/css';
+import { Style } from './Style';
 import type { StyleRules } from './internal/types';
 
 type Opt = {
@@ -27,7 +27,7 @@ export const styled = (css: StyleRules, opt: Opt) => ({
   const { name, slot } = { ...def, ...opt };
   return (
     <Root tag={tag(name, props)} {...props}>
-      <style>{styleRules(css, props)}</style>
+      <Style {...props}>{css}</Style>
       {slot ? <Slot>{children}</Slot> : children}
     </Root>
   );
