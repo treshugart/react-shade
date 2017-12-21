@@ -90,7 +90,9 @@ A keen eye might spot some of these and notice that it's not how you'd normally 
 This was chosen because it's a more idiomatic way of declaring content where custom elements aren't being used. Underneath the hood, the `Slot` will portal the content back to the host so it gets distributed using the built-in algorithms.
 
 ```js
-<Slot>This will NOT be bold.</Slot>
+<Slot>
+  <span className="totes-not-global">This will NOT be bold</span>
+</Slot>
 ```
 
 ### Custom style component
@@ -150,5 +152,3 @@ _NOTE: All numeric values will get converted to `px` units._
   }}
 </Style>
 ```
-
-_Don't worry, this is actually using the standard APIs and distribution algorithm._
