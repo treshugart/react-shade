@@ -1,9 +1,12 @@
+// @flow
+
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
 type Props = {
-  tag: string
+  tag: string,
+  tagForShadowRoot: string
 };
 
 type State = {
@@ -15,13 +18,16 @@ export class Root extends Component<Props, State> {
     shadowRoot: PropTypes.object
   };
   static defaultProps = {
-    tag: 'div'
+    tag: 'div',
+    tagForShadowRoot: 'shadow--root'
   };
   state = {};
   attachShadow = e => {
     if (e) {
       const shadowRoot = e.attachShadow({ mode: 'open' });
-      shadowRoot.appendChild(document.createElement(this.props.tag));
+      shadowRoot.appendChild(
+        document.createElement(this.props.tagForShadowRoot)
+      );
       this.setState({ shadowRoot });
     }
   };
@@ -32,7 +38,7 @@ export class Root extends Component<Props, State> {
   }
   render() {
     const { attachShadow, props, state } = this;
-    const { tag: Tag, ...rest } = this.props;
+    const { tag: Tag, tagForShadowRoot, ...rest } = this.props;
     return (
       <Tag {...rest} ref={attachShadow}>
         {state.shadowRoot

@@ -71,26 +71,7 @@ There's some drawbacks as noted above in the HTML comments:
 
 ## Creating styled components
 
-Not Styled Components, obviously, and naively implemented. Basically a simple way to create primitives who's styles don't bleed out. I haven't implemented this yet, but would like to soon.
-
-```js
-import React from 'react';
-import { render } from 'react-dom';
-import Root, { Slot } from 'react-shade';
-
-const styled = (styles, tag = 'div') => ({ children, ...props }) => (
-  <Root tag={tag} {...props}>
-    <style>{`:host{${css}}`}</style>
-    <Slot>{children}</Slot>
-  </Root>
-);
-
-const Div = styled(`
-  border: 1px solid black;
-`);
-
-render(<Div />, window.root);
-```
+There is a simple function called `styled` that returns a component that has encapsulated styles. This is very much similar to the approach Styled Components takes, but using a very cut-down version that can utilise strings or objects.
 
 ## Differences to native Shadow DOM
 

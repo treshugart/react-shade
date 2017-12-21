@@ -1,5 +1,8 @@
+.cache
+dist
 /es
 /esnext
 /node
-/node_modules
+node_modules
 npm-debug.log*
+/node_modules

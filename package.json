@@ -1,80 +1,19 @@
 {
-  "babel": {
-    "env": {
-      "es": {
-        "ignore": [
-          "__tests__",
-          "node_modules"
-        ],
-        "presets": [
-          [
-            "env",
-            {
-              "modules": false
-            }
-          ],
-          "flow",
-          "react",
-          "stage-0"
-        ]
-      },
-      "esnext": {
-        "ignore": [
-          "__tests__",
-          "node_modules"
-        ],
-        "presets": [
-          "es2016",
-          "es2017",
-          "flow",
-          "react",
-          "stage-0"
-        ]
-      },
-      "node": {
-        "ignore": [
-          "__tests__",
-          "node_modules"
-        ],
-        "presets": [
-          [
-            "env",
-            {
-              "targets": {
-                "node": "6.0.0"
-              }
-            }
-          ],
-          "flow",
-          "react",
-          "stage-0"
-        ]
-      },
-      "test": {
-        "presets": [
-          "env",
-          "flow",
-          "react",
-          "stage-0"
-        ]
-      }
-    }
-  },
   "devDependencies": {
-    "@skatejs/ssr": "^0.17.2",
+    "@skatejs/ssr": "^0.18.0",
+    "babel-jest": "^22.0.3",
+    "conartist": "^0.15.0",
     "babel-cli": "^6.24.1",
-    "babel-preset-env": "^1.6.0",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-es2016": "^6.24.1",
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "conartist": "^0.13.2",
-    "jest": "^20.0.4",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
-  },
-  "peerDependencies": {
+    "eslint-plugin-flowtype": "^2.34.0",
+    "flow-bin": "^0.55.0",
+    "jest": "^22.0.3",
+    "parcel-bundler": "^1.2.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
@@ -87,21 +26,22 @@
   "module": "es/index.js",
   "esnext": "esnext/index.js",
   "scripts": {
-    "build": "npm run build:es && npm run build:esnext && npm run build:node",
     "build:es": "BABEL_ENV=es babel src --out-dir es",
     "build:esnext": "BABEL_ENV=esnext babel src --out-dir esnext",
     "build:node": "BABEL_ENV=node babel src --out-dir node",
-    "prepublish": "npm run build",
-    "test": "jest"
+    "test": "jest",
+    "build": "npm run build:es && npm run build:esnext && npm run build:node",
+    "prepublish": "npm run build"
   },
   "jest": {
     "modulePathIgnorePatterns": [
       "./node_modules"
     ],
-    "setupFiles": [
-      "./jest"
-    ],
     "testEnvironment": "@skatejs/ssr/jest"
+  },
+  "peerDependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "name": "react-shade",
   "version": "0.0.1",
