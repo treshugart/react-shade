@@ -28,7 +28,8 @@
     "test": "jest",
     "build": "npm run build:es && npm run build:esnext && npm run build:node",
     "prepublish": "npm run build",
-    "dev": "parcel demo/index.html"
+    "dev": "parcel demo/index.html",
+    "site": "parcel build demo/index.html --public-url ./"
   },
   "jest": {
     "modulePathIgnorePatterns": ["./node_modules"],
