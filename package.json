@@ -17,11 +17,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
-  "files": [
-    "es/",
-    "esnext/",
-    "node/"
-  ],
+  "files": ["es/", "esnext/", "node/"],
   "main": "index.js",
   "module": "es/index.js",
   "esnext": "esnext/index.js",
@@ -36,9 +32,7 @@
     "site": "parcel build demo/index.html --public-url ./"
   },
   "jest": {
-    "modulePathIgnorePatterns": [
-      "./node_modules"
-    ],
+    "modulePathIgnorePatterns": ["./node_modules"],
     "testEnvironment": "@skatejs/ssr/jest"
   },
   "peerDependencies": {
@@ -47,7 +41,8 @@
   },
   "name": "react-shade",
   "version": "0.1.0",
-  "description": "",
+  "description":
+    "Use the native Web Component Shadow DOM API as React components.",
   "author": "Trey Shugart <treshugart@gmail.com>",
   "license": "MIT",
   "dependencies": {
