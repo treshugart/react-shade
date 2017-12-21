@@ -10,28 +10,28 @@ npm install react-shade
 
 ## Why
 
-This library exposes the standardised W3C Web Component Shadow DOM API as a set of React components. Normally, what you'd have to do is get a `ref` and imperatively call `attachShadow()` then somehow portal your components to that newly created shadow root. On top of that, you'd also have to somehow get light DOM into your shadow root by rendering it to the host of the shadow root.
-
-Instead of having to do all of this yourselves, you can now just compose together your React components as normal and your styles / DOM becomes encapsulated.
+This library exposes the W3C standardised [Web Component](https://github.com/w3c/webcomponents) APIs for [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM) as a set of React components. This side-steps a lot of work that needs to be done to work with the imperative APIs - as well as the proposed [declarative APIs](https://github.com/whatwg/dom/issues/510) - and gives you a nice, clean and simple interface to encapsulate your DOM / styles in a perfectly declarative manner.
 
 ## Usage
 
 ```js
 import React from 'react';
 import { render } from 'react-dom';
-import Root, { Slot } from 'react-shade';
+import Root, { Slot, Style } from 'react-shade';
 
 const App = () => (
   <div>
     <Root>
-      <style>{`
-        span {
-          font-weight: bold;
-        }
-      `}</style>
-      <span>This will be bold.</span>
+      <Style>
+        {{
+          '.totes-not-global': {
+            fontWeight: 'bold'
+          }
+        }}
+      </Style>
+      <span className="totes-not-global">This will be bold.</span>
       <Slot>
-        <span>This will NOT be bold</span>
+        <span className="totes-not-global">This will NOT be bold</span>
       </Slot>
     </Root>
   </div>
@@ -51,15 +51,13 @@ This will produce something like:
     <span slot="slot-0">This will NOT be bold</span>
     #shadow-root
       <!-- ReactDOM doesn't support calling createPortal() on a shadow root so
-      we must create a wrapper node to portal into. -->
-      <div>
-        <style>
-          span {
-            font-weight: bold;
-          }
-        </style>
+      we must create a wrapper node to portal into. Yes this is a valid name
+      and it's been picked because it's likely to not conflict. Once React
+      supports rendering to a shadow root this can be completely removed. -->
+      <shadow--root>
+        <style>span {font-weight: bold;}</style>
         <slot name="slot-0"></slot>
-      </div>
+      </shadow--root>
   </div>
 </div>
 ```
@@ -71,14 +69,88 @@ There's some drawbacks as noted above in the HTML comments:
 
 ## Creating styled components
 
-There is a simple function called `styled` that returns a component that has encapsulated styles. This is very much similar to the approach Styled Components takes, but using a very cut-down version that can utilise strings or objects.
+There is a `styled` export that is a shortcut for creating primitive components that have a default styling.
+
+```js
+import React from 'react';
+import { styled } from 'react-shade';
+
+const Div = styled({
+  ':host': {
+    fontSize: '1.2em',
+    padding: 10
+  }
+});
+```
 
 ## Differences to native Shadow DOM
 
-A keen eye might spot this and notice that it's not how you do normal Shadow DOM:
+A keen eye might spot some of these and notice that it's not how you'd normally do stuff with imperative JavaScript or HTML.
+
+### Custom slot component
+
+This was chosen because it's a more idiomatic way of declaring content where custom elements aren't being used. Underneath the hood, the `Slot` will portal the content back to the host so it gets distributed using the built-in algorithms.
 
 ```js
 <Slot>This will NOT be bold.</Slot>
+```
+
+### Custom style component
+
+This may appear to be syntactic sugar for using objects to represent your style strings, but there's a bit more to it.
+
+```js
+<Style>
+  {{
+    selector: {
+      style: 'property'
+    }
+  }}
+</Style>
+```
+
+For example, this can be minified without adding anything extra to your build pipeline. You can also specify functions that react to props that are passed to `Style`. Both the set of rules and each property can be specified as a function. Whatever `props` that are passed to `Style` will be passed through.
+
+```js
+const rulesAsFunction = ({ prop }) => ({
+  body: {
+    fontFamily: valueAsFunction
+  }
+});
+const valueAsFunction = ({ font }) => font;
+
+<Style font={'Helvetica'}>
+  {rulesAsFunction}
+</Style>
+```
+
+You may also specify an `Array` for a value and it will be mapped into a string using the standard rules listed above.
+
+```js
+<Style prop={'property'}>
+  {{
+    body: {
+      margin: [10, 0]
+    }
+  }}
+</Style>
+```
+
+Props are useful for passing in data from your application state. However, it's recommended you simply use CSS variables where you don't need to do that.
+
+_NOTE: All numeric values will get converted to `px` units._
+
+```js
+<Style>
+  {{
+    ':root': {
+      '--grid-size': 5
+    },
+    body: {
+      margin: ['calc(var(--grid-size) * 2)', 0]
+    }
+  }}
+</Style>
 ```
 
 _Don't worry, this is actually using the standard APIs and distribution algorithm._
