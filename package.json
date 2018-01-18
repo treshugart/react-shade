@@ -46,7 +46,7 @@
     "react-dom": "^16.2.0"
   },
   "name": "react-shade",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Use the native Web Component Shadow DOM API as React components in a super-duper-Reacty way (i.e. declaratively).",
   "author": "Trey Shugart <treshugart@gmail.com>",
   "license": "MIT",
