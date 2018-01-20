@@ -3,7 +3,7 @@
 import React, { Component, type Node } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import retargetEvents from 'react-shadow-dom-retarget-events';
+import retarget from './internal/retarget';
 
 type Props = {
   children?: Node,
@@ -30,7 +30,7 @@ export class Root extends Component<Props, State> {
       shadowRoot.appendChild(
         document.createElement(this.props.tagForShadowRoot)
       );
-      retargetEvents(shadowRoot);
+      retarget(shadowRoot);
       this.setState({ shadowRoot });
     }
   };

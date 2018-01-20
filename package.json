@@ -51,7 +51,6 @@
   "author": "Trey Shugart <treshugart@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "prop-types": "^15.6.0",
-    "react-shadow-dom-retarget-events": "^1.0.8"
+    "prop-types": "^15.6.0"
   }
 }
