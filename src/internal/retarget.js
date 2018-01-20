@@ -119,13 +119,16 @@ export default shadowRoot => {
   for (const reactEventName of reactEvents) {
     const nativeEventName = getNativeEventName(reactEventName);
     shadowRoot.addEventListener(nativeEventName, e => {
+      // This prevents double handling by ancestor roots. We only need to
+      // retarget once, so if a shadow root is nested within an ancestor
+      // root, this would normally end up handling it twice.
+      if (e.__ReactShadeIsHandled) return;
+      e.__ReactShadeIsHandled = true;
       const path = getPath(e);
-      e.stopPropagation();
       for (const el of path) {
-        if (el === shadowRoot) return;
-        const reactComponent = findReactComponent(el);
-        const props = findReactProps(reactComponent);
-        if (reactComponent && props) {
+        const component = findReactComponent(el);
+        const props = findReactProps(component);
+        if (component && props) {
           if (mimickedReactEvents[reactEventName]) {
             dispatchEvent(e, mimickedReactEvents[reactEventName], props);
           } else {
