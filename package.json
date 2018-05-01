@@ -1,37 +1,26 @@
 {
   "devDependencies": {
-    "babel-cli": "^6.24.1",
+    "@skatejs/ssr": "^0.18.0",
+    "babel-jest": "^22.0.3",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-es2016": "^6.24.1",
-    "babel-preset-es2017": "^6.24.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "eslint-plugin-flowtype": "^2.34.0",
     "flow-bin": "^0.61.0",
-    "babel-jest": "^22.0.3",
     "jest": "^22.0.3",
-    "@skatejs/ssr": "^0.18.0",
-    "conartist": "^0.15.1",
     "parcel-bundler": "^1.2.1",
     "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react-dom": "^16.3.2",
+    "zeropack": "^0.2.2"
   },
   "files": [
-    "es/",
-    "esnext/",
-    "node/"
+    "dist"
   ],
-  "main": "node/index.js",
-  "module": "es/index.js",
-  "esnext": "esnext/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "scripts": {
-    "build:es": "BABEL_ENV=es babel src --out-dir es",
-    "build:esnext": "BABEL_ENV=esnext babel src --out-dir esnext",
-    "build:node": "BABEL_ENV=node babel src --out-dir node",
     "test": "jest",
-    "build": "npm run build:es && npm run build:esnext && npm run build:node",
-    "prepublish": "npm run build",
+    "prepublish": "zeropack",
     "dev": "parcel demo/index.html",
     "site": "parcel build demo/index.html --public-url ./"
   },
@@ -42,8 +31,8 @@
     "testEnvironment": "@skatejs/ssr/jest"
   },
   "peerDependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
   },
   "name": "react-shade",
   "version": "0.1.5",
