@@ -2,26 +2,26 @@
 
 exports[`Slot - renders a slot 1`] = `"<div></div>"`;
 
-exports[`Slot - renders a slot 2`] = `"<shadow--root><slot name=\\"slot-1\\"></slot></shadow--root>"`;
+exports[`Slot - renders a slot 2`] = `"<slot name=\\"slot-1\\"></slot>"`;
 
 exports[`Slot - renders multiple slots 1`] = `"<div></div>"`;
 
-exports[`Slot - renders multiple slots 2`] = `"<shadow--root><slot name=\\"slot-1\\"></slot><slot name=\\"slot-2\\"></slot><slot name=\\"slot-3\\"></slot></shadow--root>"`;
+exports[`Slot - renders multiple slots 2`] = `"<slot name=\\"slot-1\\"></slot><slot name=\\"slot-2\\"></slot><slot name=\\"slot-3\\"></slot>"`;
 
 exports[`Slot - slots content 1`] = `"<div><span slot=\\"slot-1\\">content 1</span><span slot=\\"slot-2\\">content 2</span><span slot=\\"slot-3\\">content 3</span></div>"`;
 
-exports[`Slot - slots content 2`] = `"<shadow--root><slot name=\\"slot-1\\"></slot><slot name=\\"slot-2\\"></slot><slot name=\\"slot-3\\"></slot></shadow--root>"`;
+exports[`Slot - slots content 2`] = `"<slot name=\\"slot-1\\"></slot><slot name=\\"slot-2\\"></slot><slot name=\\"slot-3\\"></slot>"`;
 
 exports[`Slot - slots content 3`] = `"<div><div><span slot=\\"slot-1\\">content 1</span><span slot=\\"slot-2\\">content 2</span><span slot=\\"slot-3\\">content 3</span></div></div>"`;
 
 exports[`props - tag 1`] = `"<span></span>"`;
 
-exports[`props - tag 2`] = `"<shadow--root>test</shadow--root>"`;
+exports[`props - tag 2`] = `"test"`;
 
 exports[`rendered inside of another node 1`] = `"<section><div></div></section>"`;
 
-exports[`rendered inside of another node 2`] = `"<shadow--root><div>test</div></shadow--root>"`;
+exports[`rendered inside of another node 2`] = `"<div>test</div>"`;
 
-exports[`renders elements into the shadow root 1`] = `"<shadow--root><div>test</div></shadow--root>"`;
+exports[`renders elements into the shadow root 1`] = `"<div>test</div>"`;
 
-exports[`renders text into the shadow root 1`] = `"<shadow--root>test</shadow--root>"`;
+exports[`renders text into the shadow root 1`] = `"test"`;

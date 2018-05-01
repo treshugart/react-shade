@@ -7,8 +7,7 @@ import retarget from "./internal/retarget";
 
 type Props = {
   children?: Node,
-  tag: string,
-  tagForShadowRoot: string
+  tag: string
 };
 
 type State = {
@@ -17,28 +16,24 @@ type State = {
 
 export class Root extends Component<Props, State> {
   static defaultProps = {
-    tag: "div",
-    tagForShadowRoot: "shadow--root"
+    tag: "div"
   };
   state = {};
   attachShadow: Function = (e: HTMLElement): void => {
     if (e) {
       const shadowRoot = e.attachShadow({ mode: "open" });
-      shadowRoot.appendChild(
-        document.createElement(this.props.tagForShadowRoot)
-      );
       retarget(shadowRoot);
       this.setState({ shadowRoot });
     }
   };
   render() {
     const { attachShadow, props, state } = this;
-    const { tag: Tag, tagForShadowRoot, ...rest } = this.props;
+    const { tag: Tag, ...rest } = this.props;
     return (
       <Context.Provider value={state.shadowRoot}>
         <Tag {...rest} ref={attachShadow}>
           {state.shadowRoot
-            ? createPortal(props.children, state.shadowRoot.firstChild)
+            ? createPortal(props.children, state.shadowRoot)
             : null}
         </Tag>
       </Context.Provider>

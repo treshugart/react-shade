@@ -49,21 +49,14 @@ the shadow root to. -->
   <!-- This is where the slot content ends up (as light DOM). -->
   <span slot="slot-0">This will NOT be bold</span>
   #shadow-root
-    <!-- ReactDOM doesn't support calling createPortal() on a shadow root so
-    we must create a wrapper node to portal into. Yes this is a valid name
-    and it's been picked because it's likely to not conflict. Once React
-    supports rendering to a shadow root this can be completely removed. -->
-    <shadow--root>
-      <style>.totes-not-global{font-weight:bold;}</style>
-      <slot name="slot-0"></slot>
-    </shadow--root>
+    <style>.totes-not-global{font-weight:bold;}</style>
+    <slot name="slot-0"></slot>
 </div>
 ```
 
-There's some drawbacks as noted above in the HTML comments:
+### About the root `<div />` node
 
-1. Attaching a shadow root requires a real DOM node. We don't want to reach up in the hierarchy and mutate the DOM, so the `Root` component needs to generate a node to attach a shadow to. This defaults to a `div`, but can be whatever you want. This isn't something that will ever be able to change due to the nature of the DOM and React.
-2. ReactDOM doesn't support calling `createPortal()` on a shadow root (or document fragment, which is what a shadow root appears to be under certain conditions). Therefore, we have to create a wrapper for the shadow root that we can use as the portal node. Once React supports rendering to a shadow root, this can be simplified.
+Attaching a shadow root requires a real DOM node. We don't want to reach up in the hierarchy and mutate the DOM, so the `Root` component needs to generate a node to attach a shadow to. This defaults to a `div`, but can be whatever you want. This isn't something that will ever be able to change due to the nature of the DOM and React.
 
 ## Creating styled components
 
