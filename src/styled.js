@@ -1,10 +1,10 @@
 // @flow
 
-import React, { type Node } from 'react';
-import { Root } from './Root';
-import { Slot } from './Slot';
-import { Style } from './Style';
-import type { StyleRules } from './internal/types';
+import React, { type Node } from "react";
+import { Root } from "./Root";
+import { Slot } from "./Slot";
+import { Style } from "./Style";
+import type { StyleRules } from "./internal/types";
 
 type Opt = {
   name: string | ((props: Object) => string),
@@ -16,10 +16,10 @@ type Props = {
 };
 
 function tag(name, props) {
-  return typeof name === 'function' ? name(props) : name;
+  return typeof name === "function" ? name(props) : name;
 }
 
-const def: Opt = { name: 'div', slot: true };
+const def: Opt = { name: "div", slot: true };
 export const styled = (css: StyleRules, opt: Opt) => ({
   children,
   ...props

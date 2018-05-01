@@ -1,9 +1,8 @@
 // @flow
 
-import type { StyleRules } from './internal/types';
-
-import React from 'react';
-import { styleRules } from './internal/css';
+import React from "react";
+import { styleRules } from "./internal/css";
+import type { StyleRules } from "./internal/types";
 
 type Props = {
   children?: StyleRules

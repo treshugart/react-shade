@@ -14,8 +14,8 @@
     "@skatejs/ssr": "^0.18.0",
     "conartist": "^0.15.1",
     "parcel-bundler": "^1.2.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
   },
   "files": [
     "es/",
@@ -49,8 +49,5 @@
   "version": "0.1.5",
   "description": "Use the native Web Component Shadow DOM API as React components in a super-duper-Reacty way (i.e. declaratively).",
   "author": "Trey Shugart <treshugart@gmail.com>",
-  "license": "MIT",
-  "dependencies": {
-    "prop-types": "^15.6.0"
-  }
+  "license": "MIT"
 }
