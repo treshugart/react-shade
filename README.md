@@ -50,6 +50,7 @@ the shadow root to. -->
   <span slot="slot-0">This will NOT be bold</span>
   #shadow-root
     <style>.totes-not-global{font-weight:bold;}</style>
+    <span className="totes-not-global">This will be bold.</span>
     <slot name="slot-0"></slot>
 </div>
 ```
