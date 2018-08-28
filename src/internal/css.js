@@ -1,5 +1,7 @@
 // @flow
 
+import { StyleProps, StyleRules } from "./types";
+
 function dashcase(str) {
   return str.replace(/([A-Z]{1})/g, (match, parens, offset) => {
     return `${offset ? "-" : ""}${parens.toLowerCase()}`;
@@ -21,15 +23,15 @@ function styleValue(value, props): string {
   return ensurePx(ensureVal(value));
 }
 
-function styleProps(css: Object, props: Object): string {
+function styleProps(css: StyleRules, props: StyleProps): string {
   return Object.keys(css).reduce(
     (p, c) => p + `${dashcase(c)}:${ensurePx(styleValue(css[c], props))};`,
     ""
   );
 }
 
-export function styleRules(css: Object, props: Object): string {
-  return Object.keys(css).reduce(
+export function styleRules(css: StyleRules, props: StyleProps): string {
+  return Object.keys(css || {}).reduce(
     (p, c) => p + `${c}{${styleProps(ensureVal(css[c], props), props)}}`,
     ""
   );
