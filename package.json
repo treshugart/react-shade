@@ -1,4 +1,7 @@
 {
+  "dependencies": {
+    "shadow-css": "0.1.0"
+  },
   "devDependencies": {
     "@skatejs/ssr": "^0.18.0",
     "babel-jest": "^22.0.3",
