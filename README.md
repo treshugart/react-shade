@@ -17,16 +17,16 @@ This library exposes the W3C standardised [Web Component](https://github.com/w3c
 ## Usage
 
 ```js
-import React from 'react';
-import { render } from 'react-dom';
-import Root, { Slot, Style } from 'react-shade';
+import React from "react";
+import { render } from "react-dom";
+import Root, { Slot, Style } from "react-shade";
 
 const App = () => (
   <Root>
     <Style>
       {{
-        '.totes-not-global': {
-          fontWeight: 'bold'
+        ".totes-not-global": {
+          fontWeight: "bold"
         }
       }}
     </Style>
@@ -64,12 +64,12 @@ Attaching a shadow root requires a real DOM node. We don't want to reach up in t
 There is a `styled` export that is a shortcut for creating primitive components that have a default styling.
 
 ```js
-import React from 'react';
-import { styled } from 'react-shade';
+import React from "react";
+import { styled } from "react-shade";
 
 const Div = styled({
-  ':host': {
-    fontSize: '1.2em',
+  ":host": {
+    fontSize: "1.2em",
     padding: 10
   }
 });
@@ -97,7 +97,7 @@ This may appear to be syntactic sugar for using objects to represent your style 
 <Style>
   {{
     selector: {
-      style: 'property'
+      style: "property"
     }
   }}
 </Style>
@@ -113,15 +113,13 @@ const rulesAsFunction = ({ font }) => ({
 });
 const valueAsFunction = ({ font }) => font;
 
-<Style font={'Helvetica'}>
-  {rulesAsFunction}
-</Style>
+<Style font={"Helvetica"}>{rulesAsFunction}</Style>;
 ```
 
 You may also specify an `Array` for a value and it will be mapped into a string using the standard rules listed above.
 
 ```js
-<Style prop={'property'}>
+<Style prop={"property"}>
   {{
     body: {
       margin: [10, 0]
@@ -139,12 +137,22 @@ Props are useful for passing in data from your application state. However, it's 
 ```js
 <Style>
   {{
-    ':root': {
-      '--grid-size': 5
+    ":root": {
+      "--grid-size": 5
     },
     body: {
-      margin: ['calc(var(--grid-size) * 2)', 0]
+      margin: ["calc(var(--grid-size) * 2)", 0]
     }
   }}
 </Style>
 ```
+
+## Usage in non-native environments
+
+To use `react-shade` in browsers that don't support the native APIs you'll want to include the Shadow DOM polyfill. You can find this at https://unpkg.com/@webcomponents/webcomponentsjs.
+
+Unfortunately, that polyfill doesn't support CSS scoping. You'd normally have to find a way to use [`shadycss`](https://github.com/webcomponents/shadycss), but integrating it is non-trivial due to its reliance on `<template>` and imperative APIs.
+
+In order to scope CSS, we've placed a dependency on [`shadow-css`](https://github.com/treshugart/shadow-css) and the CSS that you pass to `<Style>` will automatically be scoped using it if you're running in a non-native environment. Check out the [demo](https://react-shade.netlify.com/) in Firefox!
+
+**_Beware of the limitations of `shadow-css`!_**
