@@ -1,9 +1,9 @@
 // @flow
 
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import Root, { Slot, Style } from '../src';
-import { Demo, Heading, Hr, Text, Theme } from './components';
+import React, { Component } from "react";
+import { render } from "react-dom";
+import Root, { Slot, Style } from "../src";
+import { Demo, Heading, Hr, Text, Theme } from "./components";
 
 type Props = {
   grid: number
@@ -18,7 +18,7 @@ class App extends Component<Props, State> {
     grid: 10
   };
   state = {
-    grid: ''
+    grid: ""
   };
   onChangeGrid = e => {
     this.setState({ grid: e.target.value });
@@ -53,16 +53,16 @@ class App extends Component<Props, State> {
           <Root>
             <Style>
               {{
-                '.title': {
-                  fontSize: '1.2em',
-                  fontWeight: 'bold',
-                  margin: 'var(--grid) 0'
+                ".title": {
+                  fontSize: "1.2em",
+                  fontWeight: "bold",
+                  margin: "var(--grid) 0"
                 },
                 code: {
-                  backgroundColor: 'papayawhip',
-                  borderRadius: 'var(--border-radius)',
-                  display: 'inline-block',
-                  padding: 'calc(var(--grid) / 2)'
+                  backgroundColor: "papayawhip",
+                  borderRadius: "var(--border-radius)",
+                  display: "inline-block",
+                  padding: "calc(var(--grid) / 2)"
                 }
               }}
             </Style>
