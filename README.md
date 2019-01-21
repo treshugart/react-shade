@@ -1,8 +1,13 @@
 # react-shade
 
-> Use the native Web Component Shadow DOM API as React components in a super-duper-Reacty way (i.e. declaratively).
+> Use the native Web Component Shadow DOM API declaratively in React.
 
 Check out the [demo](https://react-shade.netlify.com/) and [code](https://github.com/treshugart/react-shade/tree/master/demo) for it!
+
+* 🗜️ [2.8k](https://bundlephobia.com/result?p=react-shade@0.3.0)
+* 🌲 Browser-native CSS scoping.
+* ✍️ Write your CSS with strings, objects or functions that return either.
+* 🥤 Works with Shadow DOM polyfill.
 
 ## Install
 
