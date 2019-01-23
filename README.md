@@ -158,6 +158,6 @@ To use `react-shade` in browsers that don't support the native APIs you'll want 
 
 Unfortunately, that polyfill doesn't support CSS scoping. You'd normally have to find a way to use [`shadycss`](https://github.com/webcomponents/shadycss), but integrating it is non-trivial due to its reliance on `<template>` and imperative APIs.
 
-In order to scope CSS, we've placed a dependency on [`shadow-css`](https://github.com/treshugart/shadow-css) and the CSS that you pass to `<Style>` will automatically be scoped using it if you're running in a non-native environment. Check out the [demo](https://react-shade.netlify.com/) in Firefox!
+In order to scope CSS, we've placed a dependency on [`shadow-css`](https://github.com/treshugart/shadow-css) and the CSS that you pass to `<Style>` will automatically be scoped using it if you're running in a non-native environment. Check out the [demo](https://react-shade.netlify.com/) in a browser that [doesn't support ShadowDOM](https://caniuse.com/#feat=shadowdomv1).
 
 **_Beware of the limitations of `shadow-css`!_**
