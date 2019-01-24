@@ -1,7 +1,3 @@
-/es
-/esnext
-/node
 .cache
-dist
 node_modules
 npm-debug.log*

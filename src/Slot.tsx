@@ -1,15 +1,13 @@
-// @flow
-
-import React, { Children, cloneElement, Component, type Node } from "react";
+import * as React from "react";
 import { createPortal } from "react-dom";
 import Context from "./Context";
 
 type Props = {
-  children?: Node,
-  defaultContent?: Node
+  children?: React.ReactChildren;
+  defaultContent?: React.ReactChildren;
 };
 
-export class Slot extends Component<Props> {
+export class Slot extends React.Component<Props> {
   static slot = 0;
   slotName: string;
   constructor(props: Props) {
@@ -18,11 +16,11 @@ export class Slot extends Component<Props> {
   }
   render() {
     const { children, defaultContent } = this.props;
-    const childrenMapped = Children.map(children, child => {
-      return typeof child === "string" ? (
+    const childrenMapped = React.Children.map(children, child => {
+      return typeof child === "string" || typeof child === "number" ? (
         <span slot={this.slotName}>{child}</span>
       ) : (
-        cloneElement(child, {
+        React.cloneElement(child, {
           slot: this.slotName
         })
       );

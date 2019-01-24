@@ -1,13 +1,11 @@
-// @flow
-
 import React from "react";
 import shadowCss from "shadow-css";
 import Context from "./Context";
 import { styleRules } from "./internal/css";
-import type { StyleRules } from "./internal/types";
+import { StyleRules } from "./internal/types";
 
 type Props = {
-  children?: StyleRules
+  children?: StyleRules;
 };
 
 export const Style = ({ children, ...props }: Props) => (

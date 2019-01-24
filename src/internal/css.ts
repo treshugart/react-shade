@@ -1,5 +1,3 @@
-// @flow
-
 import { StyleProps, StyleRules } from "./types";
 
 function dashcase(str) {
@@ -20,7 +18,7 @@ function styleValue(value, props): string {
   if (Array.isArray(value)) {
     return value.map(v => styleValue(v, props)).join(" ");
   }
-  return ensurePx(ensureVal(value));
+  return ensurePx(ensureVal(value, props));
 }
 
 function styleProps(css: StyleRules, props: StyleProps): string {

@@ -4,17 +4,13 @@
   },
   "devDependencies": {
     "@skatejs/ssr": "^0.18.0",
-    "babel-jest": "^22.0.3",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-flow": "^6.23.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "flow-bin": "^0.61.0",
+    "@types/react": "^16.7.20",
+    "@types/react-dom": "^16.0.11",
     "jest": "^22.0.3",
     "parcel-bundler": "^1.2.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "zeropack": "^0.2.2"
+    "typescript": "^3.2.4"
   },
   "files": [
     "dist"

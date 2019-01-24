@@ -1,18 +1,16 @@
-// @flow
-
-import React, { type Node } from "react";
+import * as React from "react";
 import { Root } from "./Root";
 import { Slot } from "./Slot";
 import { Style } from "./Style";
-import type { StyleRules } from "./internal/types";
+import { StyleRules } from "./internal/types";
 
 type Opt = {
-  name: string | ((props: Object) => string),
-  slot: boolean
+  name: string | ((props: Object) => string);
+  slot: boolean;
 };
 
 type Props = {
-  children?: Node
+  children?: React.ReactChildren;
 };
 
 function tag(name, props) {
