@@ -8,12 +8,14 @@ type Props = StyleProps & {
   children?: StyleRules;
 };
 
-export const Style = ({ children, ...props }: Props) => (
-  <Context.Consumer>
-    {root => {
-      const unscopedCss = styleRules(children, props);
-      const scopedCss = shadowCss(unscopedCss)(root && root.host);
-      return scopedCss ? <style>{scopedCss}</style> : "";
-    }}
-  </Context.Consumer>
-);
+export function Style({ children, ...props }: Props) {
+  return (
+    <Context.Consumer>
+      {root => {
+        const unscopedCss = styleRules(children, props);
+        const scopedCss = shadowCss(unscopedCss)(root && root.host);
+        return scopedCss ? <style>{scopedCss}</style> : "";
+      }}
+    </Context.Consumer>
+  );
+}

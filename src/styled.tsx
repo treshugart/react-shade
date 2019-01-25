@@ -2,11 +2,11 @@ import * as React from "react";
 import { Root } from "./Root";
 import { Slot } from "./Slot";
 import { Style } from "./Style";
-import { StyleRules } from "./internal/types";
+import { StyleRules, StyleProps } from "./internal/types";
 
 type Opt = {
-  name: string | ((props: Object) => string);
-  slot: boolean;
+  name?: string | ((props: StyleProps) => string);
+  slot?: boolean;
 };
 
 type Props = {
@@ -18,7 +18,7 @@ function tag(name, props) {
 }
 
 const def: Opt = { name: "div", slot: true };
-export const styled = (css: StyleRules, opt: Opt) => ({
+export const styled = (css: StyleRules, opt: Opt = {}) => ({
   children,
   ...props
 }: Props) => {

@@ -14,7 +14,7 @@ declare module "react" {
 
 type Props = {
   children?: React.ReactChildren;
-  tag: string;
+  tag?: string;
 };
 
 type State = {

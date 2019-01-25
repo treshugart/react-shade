@@ -1,19 +1,16 @@
-// @flow
-
-import React, { Component } from "react";
-import { render } from "react-dom";
+import * as React from "react";
 import Root, { Slot, Style } from "../src";
-import { Demo, Heading, Hr, Text, Theme } from "./components";
+import { Demo, Hr, Text, Theme } from "./__components";
 
 type Props = {
-  grid: number
+  grid: number;
 };
 
 type State = {
-  grid: string
+  grid: string;
 };
 
-class App extends Component<Props, State> {
+export default class App extends React.Component<Props, State> {
   static defaultProps = {
     grid: 10
   };
@@ -84,5 +81,3 @@ class App extends Component<Props, State> {
     );
   }
 }
-
-render(<App />, window.root);
