@@ -1,10 +1,10 @@
-import React from "react";
+import * as React from "react";
 import { Style, styled } from "../src";
 import { any } from "prop-types";
 
 type BaseProps = {
   [s: string]: any;
-  children?: React.ReactChildren;
+  children?: React.ReactNode;
 };
 
 type DemoProps = {
@@ -24,7 +24,7 @@ export const Heading = styled(
       margin: ["var(--grid)", 0]
     }
   },
-  { name: ({ num }) => `h${num || 2}` }
+  ({ num }) => `h${num || 2}`
 );
 
 export const Hr = styled({
@@ -47,8 +47,8 @@ export const Text = ({ children, ...props }: BaseProps) => (
         }
       }}
     </Style>
-    <label htmlFor={children}>{children}</label>{" "}
-    <input id={children} {...props} />
+    <label htmlFor={children.toString()}>{children}</label>{" "}
+    <input id={children.toString()} {...props} />
   </div>
 );
 

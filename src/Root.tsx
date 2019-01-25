@@ -3,17 +3,8 @@ import { createPortal } from "react-dom";
 import Context from "./Context";
 import retarget from "./internal/retarget";
 
-// This is so that we can have a dynamic tag name and still pass ref.
-declare module "react" {
-  namespace JSX {
-    interface IntrinsicAttributes {
-      ref?: any;
-    }
-  }
-}
-
 type Props = {
-  children?: React.ReactChildren;
+  children?: React.ReactNode;
   tag?: string;
 };
 

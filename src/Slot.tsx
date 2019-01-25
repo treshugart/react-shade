@@ -3,8 +3,8 @@ import { createPortal } from "react-dom";
 import Context from "./Context";
 
 type Props = {
-  children?: React.ReactChildren;
-  defaultContent?: React.ReactChildren;
+  children?: React.ReactNode;
+  defaultContent?: React.ReactNode;
 };
 
 export class Slot extends React.Component<Props> {
@@ -27,16 +27,12 @@ export class Slot extends React.Component<Props> {
     });
     return (
       <Context.Consumer>
-        {shadowRoot =>
-          // We do this to get around TS complaining about <slot /> not being a
-          // valid JSX element.
-          React.createElement(
-            "slot",
-            { name: this.slotName },
-            defaultContent,
-            shadowRoot ? createPortal(childrenMapped, shadowRoot.host) : null
-          )
-        }
+        {shadowRoot => (
+          <slot name={this.slotName}>
+            {defaultContent}
+            {shadowRoot ? createPortal(childrenMapped, shadowRoot.host) : null}
+          </slot>
+        )}
       </Context.Consumer>
     );
   }

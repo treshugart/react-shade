@@ -4,29 +4,23 @@ import { Slot } from "./Slot";
 import { Style } from "./Style";
 import { StyleRules, StyleProps } from "./internal/types";
 
-type Opt = {
-  name?: string | ((props: StyleProps) => string);
-  slot?: boolean;
-};
-
+type Tag = string | ((props: { [s: string]: any }) => string);
 type Props = {
-  children?: React.ReactChildren;
+  children?: React.ReactNode;
 };
 
-function tag(name, props) {
+function createTag(name, props) {
   return typeof name === "function" ? name(props) : name;
 }
 
-const def: Opt = { name: "div", slot: true };
-export const styled = (css: StyleRules, opt: Opt = {}) => ({
+export const styled = (css: StyleRules, tag: Tag = "div") => ({
   children,
   ...props
 }: Props) => {
-  const { name, slot } = { ...def, ...opt };
   return (
-    <Root tag={tag(name, props)} {...props}>
+    <Root tag={createTag(tag, props)} {...props}>
       <Style {...props}>{css}</Style>
-      {slot ? <Slot>{children}</Slot> : children}
+      <Slot>{children}</Slot>
     </Root>
   );
 };

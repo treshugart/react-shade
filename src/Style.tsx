@@ -1,10 +1,11 @@
-import React from "react";
+import * as React from "react";
 import shadowCss from "shadow-css";
 import Context from "./Context";
 import { styleRules } from "./internal/css";
 import { StyleRules, StyleProps } from "./internal/types";
 
-type Props = StyleProps & {
+type Props = {
+  [s: string]: any;
   children?: StyleRules;
 };
 
