@@ -40,7 +40,7 @@ export class Root extends React.Component<Props, State> {
     const { tag: Tag, ...rest } = this.props;
     return (
       <Context.Provider value={state.shadowRoot}>
-        <Tag {...rest} ref={this.attachShadow}>
+        <Tag {...rest} ref={attachShadow}>
           {state.shadowRoot
             ? createPortal(props.children, state.shadowRoot)
             : null}

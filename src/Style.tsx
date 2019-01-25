@@ -2,9 +2,9 @@ import React from "react";
 import shadowCss from "shadow-css";
 import Context from "./Context";
 import { styleRules } from "./internal/css";
-import { StyleRules } from "./internal/types";
+import { StyleRules, StyleProps } from "./internal/types";
 
-type Props = {
+type Props = StyleProps & {
   children?: StyleRules;
 };
 

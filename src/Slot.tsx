@@ -8,11 +8,11 @@ type Props = {
 };
 
 export class Slot extends React.Component<Props> {
-  static slot = 0;
+  static slot: number = 0;
   slotName: string;
   constructor(props: Props) {
     super(props);
-    this.slotName = `slot-${this.constructor.slot++}`;
+    this.slotName = `slot-${Slot.slot++}`;
   }
   render() {
     const { children, defaultContent } = this.props;
@@ -27,12 +27,16 @@ export class Slot extends React.Component<Props> {
     });
     return (
       <Context.Consumer>
-        {shadowRoot => (
-          <slot name={this.slotName}>
-            {defaultContent}
-            {shadowRoot ? createPortal(childrenMapped, shadowRoot.host) : null}
-          </slot>
-        )}
+        {shadowRoot =>
+          // We do this to get around TS complaining about <slot /> not being a
+          // valid JSX element.
+          React.createElement(
+            "slot",
+            { name: this.slotName },
+            defaultContent,
+            shadowRoot ? createPortal(childrenMapped, shadowRoot.host) : null
+          )
+        }
       </Context.Consumer>
     );
   }
