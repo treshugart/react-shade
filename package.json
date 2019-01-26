@@ -22,7 +22,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "prepublish": "microbundle",
-    "start": "next start",
+    "start": "next",
     "test": "jest"
   },
   "jest": {
