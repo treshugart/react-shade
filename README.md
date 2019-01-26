@@ -20,7 +20,7 @@ npm install react-shade
 
 Most CSS solutions for React scope CSS by simulating it, but there are browser-based primitives that already do this for us.
 
-This library exposes the imperative [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM) API as a set of React components that you can use declaratively
+This library exposes the imperative [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM) API as a set of React components that you can use declaratively.
 
 ## Usage
 
@@ -91,7 +91,14 @@ The `Slot` component declares an inner-boundary for your shadow root. Anything p
 
 ### `Style`
 
-This may appear to be syntactic sugar for using objects to represent your style strings, but there's a bit more to it.
+The `Style` component may seem redundant when you can just use `<style />` but it does a number of things.
+
+- If you need SSR, or simulated scoping, you should use `Style`.
+- If you want to use objects and functions to represent your CSS, then you should use `Style`.
+- If you would like your styles to be minified with your standard JS tooling, then you should use `Style`.
+- If you don't care about those things, you're free to use the standard `style` tag.
+
+The following is a very simple use case that uses only an object to represent your CSS.
 
 ```js
 <Style>
@@ -103,7 +110,7 @@ This may appear to be syntactic sugar for using objects to represent your style 
 </Style>
 ```
 
-For example, this can be minified without adding anything extra to your build pipeline. You can also specify functions that react to props that are passed to `Style`. Both the set of rules and each property can be specified as a function. Whatever `props` that are passed to `Style` will be passed through.
+You can also specify functions that react to props that are passed to `Style`. Both the set of rules and each property can be specified as a function. Whatever `props` that are passed to `Style` will be passed through.
 
 ```js
 const rulesAsFunction = ({ font }) => ({
@@ -147,13 +154,6 @@ Props are useful for passing in data from your application state. However, it's 
 </Style>
 ```
 
-#### Why not just use `<style />`?
-
-The `Style` component is much like a standard `style` tag, but there's some benefits:
-
-- It will simulate scoping in SSR or if using the polyfill.
-- You can use objects to author your styles instead of strings.
-
 #### Why can't you pass a string to `<Style />`?
 
 There's currently no support for using strings as we'd have to parse the strings to simulate scoping and this is not simple nor inexpensive. Using objects makes it far simpler. We're not opposed to finding a way to be able to use strings, it's just not an immediate priority. Please reach out if this is something you'd like to discuss.
@@ -183,7 +183,7 @@ const div = styled.bind(null, "div");
 const Div = div(css);
 ```
 
-#### Why don't you provide `styled.div\`\${css}\``?
+#### Why don't you provide `` styled.div`${css}` ``?
 
 We don't provide a template literal API because we don't have to parse any CSS. You can use `<style />` directly, and use your own template literals, but we don't provide scoping for it. To keep things simple, we've only provided scoping simulation when running on the server (for SSR) or if using the Shadow DOM polyfill. For more information, see those sections.
 
