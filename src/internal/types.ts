@@ -1,6 +1,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicAttributes {
+      __ssr_scope?: any;
       ref?: any;
     }
     interface IntrinsicElements {

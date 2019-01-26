@@ -1,7 +1,5 @@
 {
-  "dependencies": {
-    "shadow-css": "^0.1.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@skatejs/ssr": "^0.18.0",
     "@types/next": "^7.0.6",

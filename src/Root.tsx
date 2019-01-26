@@ -12,6 +12,10 @@ type State = {
   shadowRoot?: Node;
 };
 
+const isNodeOrPolyfill =
+  typeof HTMLSlotElement === "undefined" ||
+  HTMLSlotElement.toString().indexOf("native code") === -1;
+
 export class Root extends React.Component<Props, State> {
   static defaultProps = {
     tag: "div"
@@ -43,12 +47,18 @@ export class Root extends React.Component<Props, State> {
   render() {
     const { attachShadow, props, state } = this;
     const { tag: Tag, ...rest } = this.props;
-    const ssr = typeof document === "undefined";
-    const ssrScope = { __ssr_scope: ssr ? this.scope : undefined };
-    const value = { scope: this.scope, shadowRoot: state.shadowRoot, ssr };
     return (
-      <Context.Provider value={value}>
-        <Tag {...rest} ref={attachShadow} {...ssrScope}>
+      <Context.Provider
+        value={{
+          scope: isNodeOrPolyfill ? this.scope : null,
+          shadowRoot: state.shadowRoot
+        }}
+      >
+        <Tag
+          {...rest}
+          __ssr_scope={isNodeOrPolyfill ? this.scope : undefined}
+          ref={attachShadow}
+        >
           {state.shadowRoot
             ? createPortal(props.children, state.shadowRoot)
             : props.children}
