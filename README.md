@@ -1,13 +1,14 @@
 # react-shade
 
-> Use the native Web Component Shadow DOM API declaratively in React.
+> Use the native Shadow DOM API declaratively in React.
 
-Check out the [demo](https://react-shade.netlify.com/) and [code](https://github.com/treshugart/react-shade/tree/master/demo) for it!
+- 🗜️ [1.7k](https://bundlephobia.com/result?p=react-shade@0.4.0)
+- 🌲 Browser-native CSS scoping on the client.
+- 🖥️ Simulated CSS scoping on the server.
+- ✍️ Write your CSS with strings, objects or functions.
+- 🥤 Works with the Shadow DOM polyfill (only needed for IE11 and Edge).
 
-* 🗜️ [2.8k](https://bundlephobia.com/result?p=react-shade@0.3.0)
-* 🌲 Browser-native CSS scoping.
-* ✍️ Write your CSS with strings, objects or functions that return either.
-* 🥤 Works with Shadow DOM polyfill.
+Check out the [demo](https://react-shade.netlify.com/) and [code](https://github.com/treshugart/react-shade/tree/master/pages) for it!
 
 ## Install
 
@@ -17,7 +18,9 @@ npm install react-shade
 
 ## Why
 
-This library exposes the W3C standardised [Web Component](https://github.com/w3c/webcomponents) APIs for [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM) as a set of React components. This side-steps a lot of work that needs to be done to work with the imperative APIs - as well as the proposed [declarative APIs](https://github.com/whatwg/dom/issues/510) - and gives you a nice, clean and simple interface to encapsulate your DOM / styles in a perfectly declarative manner.
+Most CSS solutions for React scope CSS by simulating it, but there are browser-based primitives that already do this for us.
+
+This library exposes the imperative [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM) API as a set of React components that you can use declaratively
 
 ## Usage
 
@@ -54,39 +57,31 @@ the shadow root to. -->
   <!-- This is where the slot content ends up (as light DOM). -->
   <span class="totes-not-global" slot="slot-0">This will NOT be bold</span>
   #shadow-root
-    <style>.totes-not-global{font-weight:bold;}</style>
-    <span class="totes-not-global">This will be bold.</span>
-    <slot name="slot-0"></slot>
+  <style>
+    .totes-not-global {
+      font-weight: bold;
+    }
+  </style>
+  <span class="totes-not-global">This will be bold.</span>
+  <slot name="slot-0"></slot>
 </div>
 ```
 
-### About the root `<div />` node
+### `Root`
+
+The `Root` component creates an element with a `shadowRoot` attached to it. This is the outer-boundary for scoping, meaning nothing comes in, and nothing gets out. You can use it standalone, or with the other components.
+
+#### About the root `<div />` node
 
 Attaching a shadow root requires a real DOM node. We don't want to reach up in the hierarchy and mutate the DOM, so the `Root` component needs to generate a node to attach a shadow to. This defaults to a `div`, but can be whatever you want. This isn't something that will ever be able to change due to the nature of the DOM and React.
 
-## Creating styled components
+### `Slot`
 
-There is a `styled` export that is a shortcut for creating primitive components that have a default styling.
+The `Slot` component declares an inner-boundary for your shadow root. Anything placed inside of a `<Slot />` will not affect anything in the ancestor `Root` and the `Root` cannot affect anything in the `<Slot />`.
 
-```js
-import React from "react";
-import { styled } from "react-shade";
+#### Why not just use `<slot />`?
 
-const Div = styled({
-  ":host": {
-    fontSize: "1.2em",
-    padding: 10
-  }
-});
-```
-
-## Differences to native Shadow DOM
-
-A keen eye might spot some of these and notice that it's not how you'd normally do Shadow DOM with imperative JavaScript or HTML. I assure you, that is only superficial. _All aspects of react-shade's API fully utilises the native APIs._
-
-### Custom slot component
-
-This was chosen because it's a more idiomatic way of declaring content where custom elements aren't being used. Underneath the hood, the `Slot` will portal the content back to the host so it gets distributed using the built-in algorithms.
+`<Slot />` was chosen because it's a more idiomatic way of declaring content where custom elements aren't being used. Underneath the hood, the `Slot` will portal the content back to the host so it gets distributed using the built-in algorithms.
 
 ```js
 <Slot>
@@ -94,7 +89,7 @@ This was chosen because it's a more idiomatic way of declaring content where cus
 </Slot>
 ```
 
-### Custom style component
+### `Style`
 
 This may appear to be syntactic sugar for using objects to represent your style strings, but there's a bit more to it.
 
@@ -135,7 +130,7 @@ You may also specify an `Array` for a value and it will be mapped into a string 
 
 _NOTE: All numeric values will get converted to `px` units._
 
-#### CSS custom properties (variables)
+#### Passing props vs CSS variables
 
 Props are useful for passing in data from your application state. However, it's recommended you simply use CSS variables where you don't need to do that.
 
@@ -152,12 +147,69 @@ Props are useful for passing in data from your application state. However, it's 
 </Style>
 ```
 
-## Usage in non-native environments
+#### Why not just use `<style />`?
+
+The `Style` component is much like a standard `style` tag, but there's some benefits:
+
+- It will simulate scoping in SSR or if using the polyfill.
+- You can use objects to author your styles instead of strings.
+
+#### Why can't you pass a string to `<Style />`?
+
+There's currently no support for using strings as we'd have to parse the strings to simulate scoping and this is not simple nor inexpensive. Using objects makes it far simpler. We're not opposed to finding a way to be able to use strings, it's just not an immediate priority. Please reach out if this is something you'd like to discuss.
+
+### `styled` - creating styled components
+
+There is a `styled` export that is a shortcut for creating primitive components that have a default styling.
+
+```js
+import React from "react";
+import { styled } from "react-shade";
+
+const Div = styled("div", {
+  ":host": {
+    fontSize: "1.2em",
+    padding: 10
+  }
+});
+```
+
+#### Why don't you provide `styled.div()`?
+
+We don't provide functions for each HTMLElement because it would cause a lot of bloat for little benefit. If you want to do this, it's pretty easy.
+
+```js
+const div = styled.bind(null, "div");
+const Div = div(css);
+```
+
+#### Why don't you provide `styled.div\`\${css}\``?
+
+We don't provide a template literal API because we don't have to parse any CSS. You can use `<style />` directly, and use your own template literals, but we don't provide scoping for it. To keep things simple, we've only provided scoping simulation when running on the server (for SSR) or if using the Shadow DOM polyfill. For more information, see those sections.
+
+## Server-side rendering
+
+A big caveat of Shadow DOM for some is that it only comes with an imperative DOM API. This means that it doesn't support server-side rendering out of the box. We're happy to say that react-shade supports server-side rendering and there's nothing you need to do on your end to make it work; it's 100% plug and play.
+
+> "The best API is no API" - not me
+
+Simulated scoping currently supports:
+
+- `:host`
+- `:host(selector)`
+- `:host-context(selector)`
+- `any-selector` (will be prefixed by the scope and turned into a descendant selector)
+
+**_Prefixing selectors is how other CSS-in-JS libraries simulate scoping._** It's worth noting as a caveat because native Shadow DOM does not have this limitation and provides much stronger selector scoping. The recommended thing to do here would be to limit your use of descendant selectors within your components.
+
+The worst-case-scenario is that you might have a selector that bleeds in SSR or under the polyfill. If your components are rehydrated in a browser that supports native Shadow DOM, scoping will be fixed when the shadow roots are created.
+
+## Differences to native Shadow DOM
+
+A keen eye might spot some of these and notice that it's not how you'd normally do Shadow DOM with imperative JavaScript or HTML. I assure you, that is only superficial. _All aspects of react-shade's API fully utilises the native APIs._
+
+## Using the Shadow DOM polyfill
 
 To use `react-shade` in browsers that don't support the native APIs you'll want to include the Shadow DOM polyfill. You can find this at https://unpkg.com/@webcomponents/webcomponentsjs.
 
-Unfortunately, that polyfill doesn't support CSS scoping. You'd normally have to find a way to use [`shadycss`](https://github.com/webcomponents/shadycss), but integrating it is non-trivial due to its reliance on `<template>` and imperative APIs.
-
-In order to scope CSS, we've placed a dependency on [`shadow-css`](https://github.com/treshugart/shadow-css) and the CSS that you pass to `<Style>` will automatically be scoped using it if you're running in a non-native environment. Check out the [demo](https://react-shade.netlify.com/) in Firefox!
-
-**_Beware of the limitations of `shadow-css`!_**
+That polyfill doesn't support CSS scoping and integrating [`shadycss`](https://github.com/webcomponents/shadycss) is non-trivial, so we've gone ahead and simulated scoping when running under the polyfill because this is basically the same thing as when running in an SSR environment.
