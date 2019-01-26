@@ -1,31 +1,30 @@
-import React from 'react';
-import { render as reactDomRender } from 'react-dom';
-import { renderIntoDocument } from 'react-dom/test-utils';
-import Root, { Slot } from '..';
+import * as React from "react";
+import { render as reactDomRender } from "react-dom";
+import Root, { Slot } from "..";
 
-document.body.innerHTML = '<div></div>';
+document.body.innerHTML = "<div></div>";
 
-function render(node) {
-  const { firstChild } = document.body;
-  reactDomRender(node, firstChild);
+function render(node): Element {
+  const { firstElementChild } = document.body;
+  reactDomRender(node, firstElementChild);
 
   // The wrapper creates a wrapping node because ReactDOM's createPortal()
   // function can't render to a shadow root, so we must reach in and return
   // the wrapper it generates.
-  return firstChild.firstChild;
+  return firstElementChild.firstElementChild;
 }
 
-test('creates a shadow root', () => {
+test("creates a shadow root", () => {
   const root = render(<Root />);
   expect(root.shadowRoot).toBeDefined();
 });
 
-test('renders text into the shadow root', () => {
+test("renders text into the shadow root", () => {
   const root = render(<Root>test</Root>);
   expect(root.shadowRoot.innerHTML).toMatchSnapshot();
 });
 
-test('renders elements into the shadow root', () => {
+test("renders elements into the shadow root", () => {
   const root = render(
     <Root>
       <div>test</div>
@@ -34,7 +33,7 @@ test('renders elements into the shadow root', () => {
   expect(root.shadowRoot.innerHTML).toMatchSnapshot();
 });
 
-test('rendered inside of another node', () => {
+test("rendered inside of another node", () => {
   const root = render(
     <section>
       <Root>
@@ -43,16 +42,16 @@ test('rendered inside of another node', () => {
     </section>
   );
   expect(root.outerHTML).toMatchSnapshot();
-  expect(root.firstChild.shadowRoot.innerHTML).toMatchSnapshot();
+  expect(root.firstElementChild.shadowRoot.innerHTML).toMatchSnapshot();
 });
 
-test('props - tag', () => {
+test("props - tag", () => {
   const root = render(<Root tag="span">test</Root>);
   expect(root.outerHTML).toMatchSnapshot();
   expect(root.shadowRoot.innerHTML).toMatchSnapshot();
 });
 
-test('Slot - renders a slot', () => {
+test("Slot - renders a slot", () => {
   const root = render(
     <Root>
       <Slot />
@@ -62,7 +61,7 @@ test('Slot - renders a slot', () => {
   expect(root.shadowRoot.innerHTML).toMatchSnapshot();
 });
 
-test('Slot - renders multiple slots', () => {
+test("Slot - renders multiple slots", () => {
   const root = render(
     <Root>
       <Slot />
@@ -74,7 +73,7 @@ test('Slot - renders multiple slots', () => {
   expect(root.shadowRoot.innerHTML).toMatchSnapshot();
 });
 
-test('Slot - slots content', () => {
+test("Slot - slots content", () => {
   const root = render(
     <Root>
       <Slot>content 1</Slot>
@@ -94,5 +93,5 @@ test('Slot - slots content', () => {
   expect(root.shadowRoot.innerHTML).toMatchSnapshot();
 
   // To look at where the light DOM is rendered.
-  expect(root.parentNode.outerHTML).toMatchSnapshot();
+  expect(root.parentElement.outerHTML).toMatchSnapshot();
 });

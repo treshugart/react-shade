@@ -1,31 +1,29 @@
 {
-  "dependencies": {
-    "shadow-css": "0.1.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@skatejs/ssr": "^0.18.0",
-    "babel-jest": "^22.0.3",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-flow": "^6.23.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "flow-bin": "^0.61.0",
+    "@types/next": "^7.0.6",
+    "@types/react": "^16.7.20",
+    "@types/react-dom": "^16.0.11",
+    "@zeit/next-typescript": "^1.1.1",
     "jest": "^22.0.3",
+    "microbundle": "^0.9.0",
+    "next": "^7.0.2",
     "parcel-bundler": "^1.2.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "zeropack": "^0.2.2"
+    "typescript": "^3.2.4"
   },
   "files": [
     "dist"
   ],
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "jest",
-    "prepublish": "zeropack",
-    "dev": "parcel demo/index.html",
-    "site": "parcel build demo/index.html --public-url ./"
+    "prepublish": "microbundle",
+    "start": "next start",
+    "test": "jest"
   },
   "jest": {
     "modulePathIgnorePatterns": [

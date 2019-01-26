@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "jsx": "react"
+  },
+  "exclude": ["**/__tests__"],
+  "include": ["src"]
+}

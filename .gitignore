@@ -1,7 +1,5 @@
-/es
-/esnext
-/node
-.cache
+.next
+.rts*
 dist
 node_modules
 npm-debug.log*
