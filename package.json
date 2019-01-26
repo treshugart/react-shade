@@ -1,9 +1,10 @@
 {
   "dependencies": {
-    "shadow-css": "0.1.0"
+    "shadow-css": "^0.1.1"
   },
   "devDependencies": {
     "@skatejs/ssr": "^0.18.0",
+    "@types/next": "^7.0.6",
     "@types/react": "^16.7.20",
     "@types/react-dom": "^16.0.11",
     "@zeit/next-typescript": "^1.1.1",
@@ -22,10 +23,9 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "jest",
     "prepublish": "microbundle",
-    "dev": "parcel demo/index.html",
-    "site": "parcel build demo/index.html --public-url ./"
+    "start": "next start",
+    "test": "jest"
   },
   "jest": {
     "modulePathIgnorePatterns": [

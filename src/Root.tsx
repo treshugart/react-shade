@@ -16,9 +16,22 @@ export class Root extends React.Component<Props, State> {
   static defaultProps = {
     tag: "div"
   };
+
+  // Number that increments for each used scope.
+  static scope: number = 0;
+
+  // The scope that was assigned to this instance.
+  scope: number = 0;
+
   state = {
     shadowRoot: null
   };
+
+  constructor(props) {
+    super(props);
+    this.scope = ++Root.scope;
+  }
+
   attachShadow = (e: HTMLElement): void => {
     if (e) {
       const shadowRoot = e.attachShadow({ mode: "open" });
@@ -26,15 +39,19 @@ export class Root extends React.Component<Props, State> {
       this.setState({ shadowRoot });
     }
   };
+
   render() {
     const { attachShadow, props, state } = this;
     const { tag: Tag, ...rest } = this.props;
+    const ssr = typeof document === "undefined";
+    const ssrScope = { __ssr_scope: ssr ? this.scope : undefined };
+    const value = { scope: this.scope, shadowRoot: state.shadowRoot, ssr };
     return (
-      <Context.Provider value={state.shadowRoot}>
-        <Tag {...rest} ref={attachShadow}>
+      <Context.Provider value={value}>
+        <Tag {...rest} ref={attachShadow} {...ssrScope}>
           {state.shadowRoot
             ? createPortal(props.children, state.shadowRoot)
-            : null}
+            : props.children}
         </Tag>
       </Context.Provider>
     );

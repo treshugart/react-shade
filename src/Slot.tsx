@@ -4,7 +4,6 @@ import Context from "./Context";
 
 type Props = {
   children?: React.ReactNode;
-  defaultContent?: React.ReactNode;
 };
 
 export class Slot extends React.Component<Props> {
@@ -15,7 +14,7 @@ export class Slot extends React.Component<Props> {
     this.slotName = `slot-${Slot.slot++}`;
   }
   render() {
-    const { children, defaultContent } = this.props;
+    const { children } = this.props;
     const childrenMapped = React.Children.map(children, child => {
       return typeof child === "string" || typeof child === "number" ? (
         <span slot={this.slotName}>{child}</span>
@@ -27,10 +26,11 @@ export class Slot extends React.Component<Props> {
     });
     return (
       <Context.Consumer>
-        {shadowRoot => (
+        {({ shadowRoot }) => (
           <slot name={this.slotName}>
-            {defaultContent}
-            {shadowRoot ? createPortal(childrenMapped, shadowRoot.host) : null}
+            {shadowRoot
+              ? createPortal(childrenMapped, shadowRoot.host)
+              : childrenMapped}
           </slot>
         )}
       </Context.Consumer>

@@ -2,7 +2,7 @@ import * as React from "react";
 import shadowCss from "shadow-css";
 import Context from "./Context";
 import { styleRules } from "./internal/css";
-import { StyleRules, StyleProps } from "./internal/types";
+import { StyleRules } from "./internal/types";
 
 type Props = {
   [s: string]: any;
@@ -12,10 +12,9 @@ type Props = {
 export function Style({ children, ...props }: Props) {
   return (
     <Context.Consumer>
-      {root => {
-        const unscopedCss = styleRules(children, props);
-        const scopedCss = shadowCss(unscopedCss)(root && root.host);
-        return scopedCss ? <style>{scopedCss}</style> : "";
+      {({ scope, ssr }) => {
+        const css = styleRules(children, props, ssr ? scope : null);
+        return css ? <style dangerouslySetInnerHTML={{ __html: css }} /> : "";
       }}
     </Context.Consumer>
   );

@@ -45,7 +45,8 @@ export default class App extends React.Component<Props, State> {
         <Demo name="Slots">
           <p className="title">
             This paragraph has a <code>title</code> class and should not be
-            styled like the following titles.
+            styled like the following titles. The <code>code</code> style should
+            also remain untouched.
           </p>
           <Root>
             <Style>
