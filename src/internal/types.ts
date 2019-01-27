@@ -6,7 +6,8 @@ declare global {
     }
     interface IntrinsicElements {
       slot: {
-        name: string;
+        children?: any;
+        name?: string;
       };
     }
   }

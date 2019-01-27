@@ -65,16 +65,14 @@ export default class App extends React.Component<Props, State> {
               }}
             </Style>
 
-            <div className="title">Only text</div>
-            <Slot>Slot 1</Slot>
-            <p>
-              (This should be wrapped with a <code>&lt;span /&gt;</code> tag by
-              default.)
+            <p className="title">
+              This is <code>code</code> in the root.
             </p>
-
-            <div className="title">Wrapper span</div>
             <Slot>
-              <span>Slot 2</span>
+              <p className="title">
+                This is <code>code</code> in the slot. We still need to find a
+                way to unscope these.
+              </p>
             </Slot>
           </Root>
         </Demo>
