@@ -13,7 +13,7 @@ function createTag(name, props) {
   return typeof name === "function" ? name(props) : name;
 }
 
-export const styled = (css: StyleRules, tag: Tag = "div") => ({
+export const styled = (tag: Tag = "div", css: StyleRules) => ({
   children,
   ...props
 }: Props) => {

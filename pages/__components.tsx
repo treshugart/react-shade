@@ -18,16 +18,13 @@ export const Demo = ({ name, children }: BaseProps & DemoProps) => (
   </section>
 );
 
-export const Heading = styled(
-  {
-    ":host": {
-      margin: ["var(--grid)", 0]
-    }
-  },
-  ({ num }) => `h${num || 2}`
-);
+export const Heading = styled(({ num }) => `h${num || 2}`, {
+  ":host": {
+    margin: ["var(--grid)", 0]
+  }
+});
 
-export const Hr = styled({
+export const Hr = styled("div", {
   ":host": {
     borderBottom: "calc(var(--grid) / 10) solid black",
     marginBottom: "calc(var(--grid) * 2)",
