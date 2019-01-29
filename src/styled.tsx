@@ -5,9 +5,7 @@ import { Style } from "./Style";
 import { StyleRules } from "./internal/types";
 
 type Tag = string | ((props: { [s: string]: any }) => string);
-type Props = {
-  children?: React.ReactNode;
-};
+type Props = { children?: React.ReactNode };
 
 function createTag(name, props) {
   return typeof name === "function" ? name(props) : name;
@@ -20,7 +18,7 @@ export const styled = (tag: Tag = "div", css: StyleRules) => ({
   return (
     <Root tag={createTag(tag, props)} {...props}>
       <Style {...props}>{css}</Style>
-      <Slot>{children}</Slot>
+      {children ? <Slot>{children}</Slot> : null}
     </Root>
   );
 };

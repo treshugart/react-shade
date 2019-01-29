@@ -26,14 +26,14 @@ function scopeSelector(selector: string, scope: number) {
   }
 
   if (hostContextOrSelector === ":host(") {
-    return selector.replace(regexHostSelector, `$1 ${attr}`);
+    return selector.replace(regexHostSelector, `${attr}$1`);
   }
 
   if (hostContextOrSelector === ":host-") {
-    return selector.replace(regexHostContext, `${attr} $1`);
+    return selector.replace(regexHostContext, `$1 ${attr}`);
   }
 
-  return `${attr} ${selector}`;
+  return `${attr} > ${selector}, ${attr} :not(slot) ${selector}`;
 }
 
 function styleValue<T>(value: StyleValue, props: T): string {
