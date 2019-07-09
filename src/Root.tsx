@@ -45,7 +45,8 @@ export class Root<T extends keyof JSX.IntrinsicElements = "div"> extends React.C
 
   render() {
     const { attachShadow, props, state } = this;
-    const { tag: Tag, ...rest } = this.props;
+    const { tag, ...rest } = this.props;
+    const Tag: string = tag
     return (
       <Context.Provider
         value={{
