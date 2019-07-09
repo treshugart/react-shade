@@ -3,10 +3,9 @@ import { createPortal } from "react-dom";
 import Context from "./Context";
 import retarget from "./internal/retarget";
 
-type Props = {
-  children?: React.ReactNode;
-  tag?: string;
-};
+type Props<T extends keyof JSX.IntrinsicElements> = {
+  tag?: T;
+} & React.ComponentProps<T>;
 
 type State = {
   shadowRoot?: Node;
@@ -16,8 +15,8 @@ const isNodeOrPolyfill =
   typeof HTMLSlotElement === "undefined" ||
   HTMLSlotElement.toString().indexOf("native code") === -1;
 
-export class Root extends React.Component<Props, State> {
-  static defaultProps = {
+export class Root<T extends keyof JSX.IntrinsicElements = "div"> extends React.Component<Props<T>, State> {
+  static defaultProps: Props<"div"> = {
     tag: "div"
   };
 
