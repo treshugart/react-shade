@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Slot - renders a slot 1`] = `"<div __ssr_scope=\\"3\\"></div>"`;
+
+exports[`Slot - renders a slot 2`] = `"<slot name=\\"slot-1\\"></slot>"`;
+
+exports[`Slot - renders multiple slots 1`] = `"<div __ssr_scope=\\"3\\"></div>"`;
+
+exports[`Slot - renders multiple slots 2`] = `"<slot name=\\"slot-1\\"></slot><slot name=\\"slot-2\\"></slot><slot name=\\"slot-3\\"></slot>"`;
+
+exports[`Slot - slots content 1`] = `"<div __ssr_scope=\\"3\\"><span slot=\\"slot-1\\">content 1</span><span slot=\\"slot-2\\">content 2</span><span slot=\\"slot-3\\">content 3</span></div>"`;
+
+exports[`Slot - slots content 2`] = `"<slot name=\\"slot-1\\"></slot><slot name=\\"slot-2\\"></slot><slot name=\\"slot-3\\"></slot>"`;
+
+exports[`Slot - slots content 3`] = `"<div><div __ssr_scope=\\"3\\"><span slot=\\"slot-1\\">content 1</span><span slot=\\"slot-2\\">content 2</span><span slot=\\"slot-3\\">content 3</span></div></div>"`;
+
+exports[`props - tag 1`] = `"<span __ssr_scope=\\"3\\"></span>"`;
+
+exports[`props - tag 2`] = `"test"`;
+
+exports[`rendered inside of another node 1`] = `"<section><div __ssr_scope=\\"2\\"></div></section>"`;
+
+exports[`rendered inside of another node 2`] = `"<div>test</div>"`;
+
+exports[`renders elements into the shadow root 1`] = `"<div>test</div>"`;
+
+exports[`renders text into the shadow root 1`] = `"test"`;
