@@ -15,15 +15,18 @@ export class Slot extends React.Component<Props> {
   }
   render() {
     const { children } = this.props;
-    const childrenMapped = React.Children.map(children, child => {
-      return typeof child === "string" || typeof child === "number" ? (
-        <span slot={this.slotName}>{child}</span>
-      ) : (
-        React.cloneElement(child, {
-          slot: this.slotName
-        })
-      );
-    });
+    const childrenMapped = React.Children.map(
+      children,
+      (child: React.ReactChild) => {
+        return typeof child === "string" || typeof child === "number" ? (
+          <span slot={this.slotName}>{child}</span>
+        ) : (
+          React.cloneElement(child, {
+            slot: this.slotName
+          })
+        );
+      }
+    );
     return (
       <Context.Consumer>
         {({ shadowRoot }) => (

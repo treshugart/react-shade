@@ -11,12 +11,17 @@ type State = {
 };
 
 export default class App extends React.Component<Props, State> {
-  static defaultProps = {
-    grid: 10
-  };
-  state = {
-    grid: ""
-  };
+  static get defaultProps() {
+    return {
+      grid: 10
+    };
+  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      grid: ""
+    };
+  }
   onChangeGrid = e => {
     this.setState({ grid: e.target.value });
   };

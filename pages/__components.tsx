@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Style, styled } from "../src";
-import { any } from "prop-types";
 
 type BaseProps = {
   [s: string]: any;

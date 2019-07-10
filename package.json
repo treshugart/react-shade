@@ -1,25 +1,33 @@
 {
-  "dependencies": {},
+  "dependencies": {
+    "acorn": "^6.2.0"
+  },
   "devDependencies": {
-    "@skatejs/ssr": "^0.18.0",
-    "@types/next": "^7.0.6",
-    "@types/react": "^16.7.20",
-    "@types/react-dom": "^16.0.11",
-    "@zeit/next-typescript": "^1.1.1",
-    "jest": "^22.0.3",
-    "microbundle": "^0.9.0",
-    "next": "^7.0.2",
-    "parcel-bundler": "^1.2.1",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "typescript": "^3.2.4"
+    "@babel/core": "^7.5.4",
+    "@babel/plugin-syntax-class-properties": "^7.2.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.5.4",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "@skatejs/ssr": "^0.19.11",
+    "@types/jest": "^24.0.15",
+    "@types/next": "^8.0.5",
+    "@types/react": "^16.8.23",
+    "@types/react-dom": "^16.8.4",
+    "jest": "^24.8.0",
+    "microbundle": "^0.11.0",
+    "next": "^9.0.0",
+    "np": "^5.0.3",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "typescript": "^3.5.3"
   },
   "files": [
     "dist"
   ],
   "main": "dist/index.js",
   "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "scripts": {
     "prepublish": "microbundle",
     "start": "next",
