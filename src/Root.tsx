@@ -15,7 +15,9 @@ const isNodeOrPolyfill =
   typeof HTMLSlotElement === "undefined" ||
   HTMLSlotElement.toString().indexOf("native code") === -1;
 
-export class Root<T extends keyof JSX.IntrinsicElements = "div"> extends React.Component<Props<T>, State> {
+export class Root<
+  T extends keyof JSX.IntrinsicElements = "div"
+> extends React.Component<Props<T>, State> {
   static defaultProps: Props<"div"> = {
     tag: "div"
   };
@@ -46,7 +48,7 @@ export class Root<T extends keyof JSX.IntrinsicElements = "div"> extends React.C
   render() {
     const { attachShadow, props, state } = this;
     const { tag, ...rest } = this.props;
-    const Tag: string = tag
+    const Tag: string = tag;
     return (
       <Context.Provider
         value={{

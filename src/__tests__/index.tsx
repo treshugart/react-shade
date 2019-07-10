@@ -5,13 +5,9 @@ import Root, { Slot } from "..";
 document.body.innerHTML = "<div></div>";
 
 function render(node): Element {
-  const { firstElementChild } = document.body;
-  reactDomRender(node, firstElementChild);
-
-  // The wrapper creates a wrapping node because ReactDOM's createPortal()
-  // function can't render to a shadow root, so we must reach in and return
-  // the wrapper it generates.
-  return firstElementChild.firstElementChild;
+  const root = document.body.firstChild as Element;
+  reactDomRender(node, root);
+  return root.firstChild as Element;
 }
 
 test("creates a shadow root", () => {
@@ -42,7 +38,7 @@ test("rendered inside of another node", () => {
     </section>
   );
   expect(root.outerHTML).toMatchSnapshot();
-  expect(root.firstElementChild.shadowRoot.innerHTML).toMatchSnapshot();
+  expect((root.firstChild as Element).shadowRoot.innerHTML).toMatchSnapshot();
 });
 
 test("props - tag", () => {
@@ -93,5 +89,5 @@ test("Slot - slots content", () => {
   expect(root.shadowRoot.innerHTML).toMatchSnapshot();
 
   // To look at where the light DOM is rendered.
-  expect(root.parentElement.outerHTML).toMatchSnapshot();
+  expect((root.parentNode as Element).outerHTML).toMatchSnapshot();
 });
