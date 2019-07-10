@@ -37,7 +37,11 @@
     "modulePathIgnorePatterns": [
       "./node_modules"
     ],
-    "testEnvironment": "@skatejs/ssr/jest"
+    "testEnvironment": "@skatejs/ssr/jest",
+    "testPathIgnorePatterns": [
+      "/dist/",
+      "/node_modules/"
+    ]
   },
   "peerDependencies": {
     "react": "^16.3.2",
