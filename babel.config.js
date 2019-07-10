@@ -1,13 +1,4 @@
-const envs = {
-  next: {
-    presets: ["next/babel"]
-  },
-  test: {
-    presets: ["next/babel"]
-  }
-};
-
-module.exports = envs[process.env.NODE_ENV] || {
+module.exports = {
   presets: [
     "@babel/preset-env",
     "@babel/preset-react",
