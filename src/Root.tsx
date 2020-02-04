@@ -1,7 +1,6 @@
 import * as React from "react";
 import { createPortal } from "react-dom";
 import Context from "./Context";
-import retarget from "./internal/retarget";
 
 type Props<T extends keyof JSX.IntrinsicElements> = {
   tag?: T;
@@ -40,7 +39,6 @@ export class Root<
   attachShadow = (e: HTMLElement): void => {
     if (e) {
       const shadowRoot = e.attachShadow({ mode: "open" });
-      retarget(shadowRoot);
       this.setState({ shadowRoot });
     }
   };
