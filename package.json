@@ -22,7 +22,7 @@
   "module": "dist/index.mjs",
   "types": "src/index.ts",
   "scripts": {
-    "prepublish": "microbundle",
+    "prepare": "microbundle",
     "test": "jest"
   },
   "jest": {
