@@ -6,7 +6,7 @@
 - 🌲 Browser-native CSS scoping on the client.
 - 🖥️ Simulated CSS scoping on the server.
 - ✍️ Write your CSS with strings, objects or functions.
-- 🥤 Works with the Shadow DOM polyfill (only needed for IE11 and Edge).
+- 🥤 Works with the Shadow DOM polyfill (only needed for IE11 and pre-Chromium Edge).
 
 ## Install
 
