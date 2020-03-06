@@ -22,7 +22,7 @@
   "module": "dist/index.mjs",
   "types": "src/index.ts",
   "scripts": {
-    "prepublish": "microbundle",
+    "prepare": "microbundle",
     "test": "jest"
   },
   "jest": {
@@ -35,8 +35,8 @@
     ]
   },
   "peerDependencies": {
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "name": "react-shade",
   "version": "0.5.1",
